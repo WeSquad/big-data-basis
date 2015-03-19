@@ -1,0 +1,340 @@
+<!DOCTYPE HTML>
+<html>
+<title>BDB : Big Data Basis</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+<!--
+################################# 
+# Author  : Stéphane LENGLET 	#  
+# Company : wemanity			#
+# Date    : 02/2015  			#
+#################################
+-->
+<link href="../js/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<!-- <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet"> -->
+<link href="../css/specific.css" rel="stylesheet">
+<!-- <link href="../css/tagSphere.css" rel="stylesheet"> -->
+<!-- <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" /> -->
+<!--  <link href="../js/jquery-1.5.2.min.js" rel="javascript"> -->
+<link rel="stylesheet" href="../css/jquery.bxslider.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../css/jquery.fancybox.css?v=2.1.4" type="text/css" media="screen" />
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet" href="../css/jquery.fancybox-buttons.css?v=1.0.5" type="text/css" media="screen" />
+
+<script type="text/javascript" src="../js/jquery.fancybox.pack.js?v=2.1.4"></script>
+<script src="../js/jquery-1.9.0.min.js"></script>
+<!--  <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script> -->
+<script src="../js/jquery-ui.js"></script>
+<script src="../js/jquery.tagSphere.js"></script>
+<script src="../js/jquery.fancybox.js"></script>
+<script src="../js/jquery.bxslider.js"></script>
+<script type="text/javascript" src="../js/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="../js/jquery.fancybox-media.js?v=1.0.5"></script>
+<link rel="stylesheet" href="../css/jquery.fancybox-thumbs.css?v=1.0.7" type="text/css" media="screen" />
+<script type="text/javascript" src="../js/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<!-- <script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script> -->
+</head>
+<body>
+	<script type="text/javascript">
+	
+		function jsoncallback(data) {
+
+			titre = data.titre;
+			texte = data.texte;
+			logo = data.logo;
+			url = data.urlVideo;
+			auteur = data.auteur;
+
+		}
+
+		function showAfterKeypress() {
+
+			$("#recherche").focus();
+			var e = jQuery.Event("keypress");
+			e.which = 13;
+			e.keyCode = 13;
+			$("#recherche").trigger(e);
+			setTimeout(function() {
+				$("#presentation_image").attr("src","../../../../images/"+logo+"");
+				$("#presentation").text(''+texte+'');
+			}, 200);
+		}
+		
+		function getJson(a)
+		{
+			$.getJSON("http://192.168.10.148/jsonFromMongo.php?rubrique="+a+"&jsoncallback=?");
+			$("#recherche").val(''+a+'');
+			showAfterKeypress();
+		}
+
+		$(document)
+				.ready(
+						function() {							
+							
+							$('.slider1').bxSlider({
+							    slideWidth: 250,
+							    minSlides: 1,
+							    maxSlides: 1,
+							    slideMargin: 10
+							  });
+							
+							
+							$('#tagsphere').tagSphere({
+								height : 330,
+								width : 480,
+								slower : 0.5,
+								radius : 130,
+								timer : 130,
+								fontMultiplier : 40
+							});
+
+							
+							getJson('Bigdata');
+
+							$('#bigdata_sp').click(function() {
+
+								rub = $("#recherche").val();
+								$.getJSON("http://192.168.10.148/jsonFromMongo.php?rubrique="+rub+"&jsoncallback=?");
+								$('.fancyframe').attr("href",""+url+"");
+								$('.fancyframe').fancybox({
+										'type' : 'iframe',
+										'width' : 600,
+										'height' : 300
+								});
+
+							});
+
+							
+							$('#bigdata').click(function() {getJson('Bigdata');});
+							$('#spark').click(function() {getJson('Spark');});
+							$('#yarn').click(function() {getJson('Yarn');});
+							$('#hadoop').click(function() {getJson('Hadoop');});
+							$('#mapreduce').click(function() {getJson('MapReduce')});
+							$('#hdfs').click(function() {getJson('HDFS');});
+							$('#jobtracker').click(function() {getJson('JobTracker');});
+							$('#tasktracker').click(function() {getJson('TaskTracker');});
+							$('#cloudera').click(function() {getJson('Cloudera');});
+							$('#hortonworks').click(function() {getJson('Hortonworks');});
+							$('#mapr').click(function() {getJson('MapR');});
+							$('#namenode').click(function() {getJson('NameNode');});
+							$('#datanode').click(function() {getJson('DataNode');});
+							$('#resourcemanager').click(function() {getJson('ResourceManager');});
+							$('#applicationmaster').click(function() {getJson('ApplicationMaster');});
+							$('#mr1').click(function() {getJson('MR1');});
+							$('#mr2').click(function() {getJson('MR2');});
+							$('#container').click(function() {getJson('Container');});
+							$('#zookeeper').click(function() {getJson('Zookeeper');});
+							$('#oozie').click(function() {getJson('Oozie');});
+							$('#hue').click(function() {getJson('Hue');});
+							$('#impala').click(function() {getJson('Impala');});
+							$('#hive').click(function() {getJson('Hive');});
+							$('#pig').click(function() {getJson('Pig');});
+							$('#flume').click(function() {getJson('Flume');});
+							
+							$('#bigdata2').click(function() {getJson('Bigdata');});
+							$('#spark2').click(function() {getJson('Spark');});
+							$('#yarn2').click(function() {getJson('Yarn');});
+							$('#hadoop2').click(function() {getJson('Hadoop');});
+							$('#mapreduce2').click(function() {getJson('MapReduce')});
+							$('#hdfs2').click(function() {getJson('HDFS');});
+							$('#jobtracker2').click(function() {getJson('JobTracker');});
+							$('#tasktracker2').click(function() {getJson('TaskTracker');});
+							$('#cloudera2').click(function() {getJson('Cloudera');});
+							$('#hortonworks2').click(function() {getJson('Hortonworks');});
+							$('#mapr2').click(function() {getJson('MapR');});
+							$('#namenode2').click(function() {getJson('NameNode');});
+							$('#datanode2').click(function() {getJson('DataNode');});
+							$('#resourcemanager2').click(function() {getJson('ResourceManager');});
+							$('#applicationmaster2').click(function() {getJson('ApplicationMaster');});
+							$('#mr12').click(function() {getJson('MR1');});
+							$('#mr22').click(function() {getJson('MR2');});
+							$('#container2').click(function() {getJson('Container');});
+							$('#zookeeper2').click(function() {getJson('Zookeeper');});
+							$('#oozie2').click(function() {getJson('Oozie');});
+							$('#hue2').click(function() {getJson('Hue');});
+							$('#impala2').click(function() {getJson('Impala');});
+							$('#hive2').click(function() {getJson('Hive');});
+							$('#pig2').click(function() {getJson('Pig');});
+							$('#flume2').click(function() {getJson('Flume');});
+
+							var availableTags = [ "Big Data", "Hadoop",
+									"MapReduce", "Cloudera", "HortonWorks",
+									"MapR", "JobTracker", "TaskTracker",
+									"Yarn", "NameNode", "DataNode", "HDFS",
+									"ResourceManager", "ApplicationMaster",
+									"MR1", "MR2", "Container", "ZooKeeper",
+									"Oozie", "Hue", "Spark", "Impala", "Hive",
+									"Pig", "Flume" ];
+
+							$('#recherche').keypress(function(e) {
+								console.log("enter pressed");
+								if (e.which == 13) { // correspond à l'appui sur la touche entree
+									rub = $("#recherche").val();
+									$.getJSON("http://192.168.10.148/jsonFromMongo.php?rubrique="+rub+"&jsoncallback=?");
+									setTimeout(function() {
+										$("#presentation_image").attr("src","../../../../images/"+logo+"");
+										$("#presentation").text(''+texte+'');
+									}, 200)
+
+								}
+							});
+
+							$("#recherche").autocomplete({
+								source : availableTags
+							});
+						});
+	</script>
+
+	<div class="container">
+		<div class="row well white">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"
+				style="height: 40px;">
+				<div class="h1 white">
+					Big Data Basis
+				</div>
+			</div>
+		</div>
+		<div class="row well blue">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+				<div id="home" class="row well">
+					<div class="col-xs-12col-sm-12 col-md-12 col-lg-12">
+<!-- DEB XS SMALL AND MEDIUM DEVICE -->
+						<div class="hidden-lg h2 blue">
+							<div class="h4 grey">
+								<!-- <form><input type="text" id="recherche" value="Big Data"></form> -->
+								<div class="hidden-lg slider1">
+									<div class="slide">
+										<a href="#desc" id=bigdata2><img src="http://192.168.10.148/images/bigdata.jpg"></a>
+									</div>
+									<div class="slide">
+										<a href="#desc" id=hadoop2><img src="http://192.168.10.148/images/hadoop.png"></a>
+									</div>
+									<div class="slide">
+										<a href="#desc" id=flume2><img src="http://192.168.10.148/images/flume.png"></a>
+									</div>
+									<div class="slide">
+										<a href="#desc" id=hive2><img src="http://192.168.10.148/images/hive.jpg"></a>
+									</div>
+									<div class="slide">
+										<a href="#desc" id='mapreduce2'><img src="http://192.168.10.148/images/mapreduce.png"></a>
+									</div>
+									<div class="slide">
+										<a href="#desc" id=pig2><img src="http://192.168.10.148/images/pig.jpg"></a>
+									</div>
+									<div class="slide">
+										<a href="#desc" id=spark2><img src="http://192.168.10.148/images/spark.jpg"></a>
+									</div>
+									<div class="slide">
+										<a href="#desc" id=yarn2><img src="http://192.168.10.148/images/yarn.jpg"></a>
+									</div>
+									<div class="slide">
+										<a href="#desc" id=zookeeper2><img src="http://192.168.10.148/images/zookeeper.jpg"></a>
+									</div>
+								</div>
+							</div>
+						</div>
+<!-- FIN XS SMALL AND MEDIUM DEVICE -->
+<!-- DEB LG DEVICE -->
+							<div class="hidden-xs hidden-sm hidden-md h2 blue">
+
+							<div class="h4 grey">
+								<form><input type="text" id="recherche" value="Big Data"></form>
+								<div id="tagsphere">
+									<ul>
+										<li><a href="#" id=bigdata>Big Data</a>
+										</li>
+										<li><a href="#" id=hadoop>Hadoop</a>
+										</li>
+										<li><a href="#" id=mapreduce>MapReduce</a>
+										</li>
+										<li><a href="#" id=cloudera>Cloudera</a>
+										</li>
+										<li><a href="#" id=hortonworks>HortonWorks</a>
+										</li>
+										<li><a href="#" id=mapr>MapR</a>
+										</li>
+										<li><a href="#" id=jobtracker>JobTracker</a>
+										</li>
+										<li><a href="#" id=tasktracker>TaskTracker</a>
+										</li>
+										<li><a href="#" id=yarn>Yarn</a>
+										</li>
+										<li><a href="#" id=namenode>NameNode</a>
+										</li>
+										<li><a href="#" id=datanode>DataNode</a>
+										</li>
+										<li><a href="#" id=hdfs>HDFS</a>
+										</li>
+										<li><a href="#" id=resourcemanager>ResourceManager</a>
+										</li>
+										<li><a href="#" id=applicationmaster>ApplicationMaster</a>
+										</li>
+										<li><a href="#" id=mr1>MR1</a>
+										</li>
+										<li><a href="#" id=mr2>MR2</a>
+										</li>
+										<li><a href="#" id=container>Container</a>
+										</li>
+										<li><a href="#" id=zookeeper>ZooKeeper</a>
+										</li>
+										<li><a href="#" id=oozie>Oozie</a>
+										</li>
+										<li><a href="#" id=hue>Hue</a>
+										</li>
+										<li><a href="#" id=spark>Spark</a>
+										</li>
+										<li><a href="#" id=impala>Impala</a>
+										</li>
+										<li><a href="#" id=hive>Hive</a>
+										</li>
+										<li><a href="#" id=pig>Pig</a>
+										</li>
+										<li><a href="#" id=flume>Flume</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+<!-- FIN LG DEVICE -->
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+				<div id="pres" class="row well">
+					<div class="hidden-sm hidden-xs hidden-md">
+						<img id="presentation_image" width="400" height="170" src="../../../../images/bigdata.jpg"><br><br>
+					</div>
+					<a href="" id='desc'></a>
+					<div class="h5 grey" style="height: 175px;" id="presentation">Les
+						big data, littéralement les « grosses données », ou mégadonnées
+						(recommandé), parfois appelées données massives, désignent des
+						ensembles de données qui deviennent tellement volumineux qu'ils en
+						deviennent difficiles à travailler avec des outils classiques de
+						gestion de base de données ou de gestion de l'information. L'on
+						parle aussi de datamasse en français par similitude avec la
+						biomasse.
+					</div>
+				</div>	
+			
+				<div class="row well">
+					<div class="h5 grey" style="height: 0px;" id="hrefpresentation">
+						<a class="fancyframe" href="#" id="bigdata_sp">En savoir plus
+							en vidéo : <img id="presentation_video" width="15" height="15"
+							src="../../../../images/video.gif"> </a><br> <br>
+					</div>
+				</div>
+			</div>
+		</div>	
+		<div class="row well white">
+			<div class="col-xs-10 col-sm-10 col-md-10 col-lg10" >
+				<div class="h6">Big Data Basis © Wemanity / Fev 2015. All
+					rights reserved </div>
+			</div>
+			<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" >
+				<div class="h6"><img style="height: 40px;"
+						src="../../../../images/wemanity.jpg"></div>
+			</div>	
+		</div>
+	</div>
+</body>
+</html>

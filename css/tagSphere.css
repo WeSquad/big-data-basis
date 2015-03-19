@@ -1,0 +1,24 @@
+#tagsphere{
+background: url('http://www.kicoe.net/images/background.png') top center no-repeat;
+height: 230px; width: 380px;
+padding: 10px;
+margin: 10px;
+margin: 0 auto;
+}
+ul li a, ul li a:visited{
+color: #E29154;
+font-weight: bold;
+text-decoration: none;
+}
+ul li a:hover, ul li.link1 a:hover, ul li.link2 a:hover, ul li.link3 a:hover{
+color: #4EB6BF;
+}
+ul li.link1 a{
+color: #D8B596;
+}
+ul li.link2 a{
+color: #EAAF84
+}
+ul li.link3 a{
+color: #FF8000;
+}
